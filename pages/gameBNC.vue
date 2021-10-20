@@ -40,8 +40,8 @@ export default {
           return num;
         });
     },
-    changeAnswerStatus() {
-      this.showAnswer = !this.showAnswer
+    answerDisplay() {
+      this.showAnswer = true
     },
     restart() {
       this.initAnswer()
@@ -93,7 +93,7 @@ export default {
 <template>
   <div class="game">
     <div class="text-right">
-      <v-btn @click="changeAnswerStatus">Tell me the answer</v-btn>
+      <v-btn @click="answerDisplay">Tell me the answer</v-btn>
       <v-btn @click="restart" class="ml-2">Restart</v-btn>
     </div>
     <v-form ref="form" v-model="valid" class="game--form d-flex align-center">
@@ -103,7 +103,7 @@ export default {
     </v-form>
     <div class="game--result">
       <div v-for="(result, idx) in results" :key="idx" class="d-flex justify-center my-1">
-        <div>#{{ idx+1 }}</div>
+        <div class="game--result__order text-right">#{{ idx+1 }}</div>
         <div class="game--result__number primary primary--text text--lighten-5 px-1 rounded mx-5">{{ result.value }}</div>
         <div>{{ result.result }}</div>
       </div>
@@ -135,6 +135,10 @@ export default {
     width: 50%;
     margin: 0 auto;
     font-size: 20px;
+
+    &__order {
+      width: 30px;
+    }
 
     &__number {
       padding-top: 1px;
