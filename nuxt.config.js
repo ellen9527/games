@@ -69,5 +69,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  router: {
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/'
+  },
 }
