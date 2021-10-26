@@ -162,7 +162,7 @@ export default {
 
     button {
       padding: 2px;
-      background-color: #455a64;
+      background-color: var(--v-blue-grey-lighten5);
       border-radius: 4px;
     }
   }
