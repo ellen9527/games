@@ -111,6 +111,11 @@ export default {
           title: 'Bulls & Cows 猜數字',
           to: '/gameBNC'
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Todo List',
+          to: '/list'
+        },
       ],
       miniVariant: false,
       right: true,
