@@ -5,15 +5,15 @@ export default {
     return {
       lists: [
         {
-          text: '我看到常威在打來福',
+          text: '告訴包大人我看到常威在打來福',
           active: false,
         },
         {
-          text: '你不會是海底撈月十三么吧',
+          text: '問德華你不會是海底撈月十三么吧？',
           active: false,
         },
         {
-          text: '沒收功又罵髒話',
+          text: '今日大事：大軍沒收功又罵髒話',
           active: false,
         },
       ],
