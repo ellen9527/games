@@ -24,11 +24,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+    <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- <v-btn
         icon
@@ -79,10 +75,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
+    <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -90,7 +83,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       clipped: false,
       drawer: false,
@@ -99,7 +92,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: '/',
         },
         // {
         //   icon: 'mdi-chart-bubble',
@@ -109,19 +102,19 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'Bulls & Cows 猜數字',
-          to: '/gameBNC'
+          to: '/gameBNC',
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Todo List',
-          to: '/list'
+          to: '/list',
         },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Vuetify.js',
     }
-  }
+  },
 }
 </script>

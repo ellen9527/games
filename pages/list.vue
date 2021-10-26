@@ -1,47 +1,47 @@
 <script>
 export default {
-  name: "List",
+  name: 'List',
   data() {
     return {
       lists: [
         {
-          text: "我看到常威在打來福",
-          active: false
+          text: '我看到常威在打來福',
+          active: false,
         },
         {
-          text: "你不會是海底撈月十三么吧",
-          active: false
+          text: '你不會是海底撈月十三么吧',
+          active: false,
         },
         {
-          text: "沒收功又罵髒話",
-          active: false
-        }
+          text: '沒收功又罵髒話',
+          active: false,
+        },
       ],
       rules: [
-        v => !!v || "待辦事項不可為空白",
-        v => (v || "").length <= 20 || "待辦事項不可輸入多於20個字"
+        v => !!v || '待辦事項不可為空白',
+        v => (v || '').length <= 20 || '待辦事項不可輸入多於20個字',
       ],
       showNew: false,
-      newText: "",
-      editId: null
-    };
+      newText: '',
+      editId: null,
+    }
   },
   computed: {
     total() {
       return this.lists.reduce(
         (acc, list, key) => {
-          const status = list.active ? "finish" : "todo";
+          const status = list.active ? 'finish' : 'todo'
           acc[status].push({
             ...list,
-            key
-          });
-          return acc;
+            key,
+          })
+          return acc
         },
         {
           todo: [],
-          finish: []
-        }
-      );
+          finish: [],
+        },
+      )
     },
     cancelText() {
       if (this.editId) {
@@ -53,58 +53,60 @@ export default {
   methods: {
     handleNew() {
       if (!this.$refs.newForm.validate()) {
-        return;
+        return
       }
 
       if (this.editId) {
-        this._changeLists(this.editId, "text", this.newText);
+        this._changeLists(this.editId, 'text', this.newText)
       } else {
-        this.lists.push({ text: this.newText, active: false });
+        this.lists.push({ text: this.newText, active: false })
       }
-      this.reset();
+      this.reset()
     },
     handleShowNew(value) {
-      this._showNew(value);
+      this._showNew(value)
     },
     handleCheck(key) {
-      this._changeLists(key, "active", true);
+      this._changeLists(key, 'active', true)
     },
     handleEdit(key) {
-      this._showNew(true);
+      this._showNew(true)
 
-      const { text } = this.lists[key];
-      this.newText = text;
-      this.editId = key;
+      const { text } = this.lists[key]
+      this.newText = text
+      this.editId = key
     },
     handleDelete(key) {
-      this.lists.splice(key, 1);
+      this.lists.splice(key, 1)
     },
     handleReturnLists(key) {
-      this._changeLists(key, "active", false);
+      this._changeLists(key, 'active', false)
     },
     _showNew(value = true) {
       if (!value) {
         this.reset()
       }
-      this.showNew = value;
+      this.showNew = value
     },
     _changeLists(key, property, value) {
-      this.$set(this.lists[key], property, value);
+      this.$set(this.lists[key], property, value)
     },
     reset() {
-      this.newText = "";
-      this.editId = null;
-      this.$refs.newForm.reset();
-    }
-  }
-};
+      this.newText = ''
+      this.editId = null
+      this.$refs.newForm.reset()
+    },
+  },
+}
 </script>
 
 <template>
   <div class="list">
     <div class="text-right mb-3">
       <v-btn v-if="!showNew" @click="handleShowNew(true)">新增待辦事項</v-btn>
-      <v-btn v-if="showNew" @click="handleShowNew(false)">{{ cancelText }}</v-btn>
+      <v-btn v-if="showNew" @click="handleShowNew(false)">
+        {{ cancelText }}
+      </v-btn>
     </div>
     <transition name="fade">
       <v-form v-if="showNew" ref="newForm" class="d-flex align-center">
@@ -148,7 +150,8 @@ export default {
     transition: all 0.5s;
   }
 
-  .fade-enter, .fade-leave-to {
+  .fade-enter,
+  .fade-leave-to {
     opacity: 0;
   }
 
@@ -159,7 +162,7 @@ export default {
 
     button {
       padding: 2px;
-      background-color: #455A64;
+      background-color: #455a64;
       border-radius: 4px;
     }
   }
