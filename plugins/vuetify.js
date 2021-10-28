@@ -10,6 +10,10 @@ export default {
       light: {
         'blue-grey': {
           lighten5: colors.blueGrey.lighten5,
+          darken1: colors.blueGrey.darken1,
+        },
+        line: {
+          base: colors.blue.darken3,
         },
       },
     },

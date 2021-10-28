@@ -100,14 +100,19 @@ export default {
         //   to: '/inspire'
         // },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-alien',
           title: 'Bulls & Cows 猜數字',
           to: '/gameBNC',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-folder-heart-outline',
           title: 'Todo List',
           to: '/list',
+        },
+        {
+          icon: 'mdi-solar-panel-large',
+          title: 'Jiugongge九宮格',
+          to: '/jiugongge',
         },
       ],
       miniVariant: false,

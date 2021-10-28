@@ -96,22 +96,22 @@ export default {
       <v-btn @click="answerDisplay">Tell me the answer</v-btn>
       <v-btn @click="restart" class="ml-2">Restart</v-btn>
     </div>
-    <v-form ref="form" v-model="valid" class="game--form d-flex align-center">
+    <v-form ref="form" v-model="valid" class="game-form d-flex align-center">
       <v-text-field v-model="value" label="Guess the numbers" :rules="rules" />
       <v-btn :disabled="answerRight || showAnswer" @click="handleCheckAnswer">
         Test
       </v-btn>
       <v-btn @click="reset">Reset</v-btn>
     </v-form>
-    <div class="game--result">
+    <div class="game-result">
       <div
         v-for="(result, idx) in results"
         :key="idx"
         class="d-flex justify-center my-1"
       >
-        <div class="game--result__order text-right">#{{ idx + 1 }}</div>
+        <div class="game-result__order text-right">#{{ idx + 1 }}</div>
         <div
-          class="game--result__number primary primary--text text--lighten-5 px-1 rounded mx-5"
+          class="game-result__number primary primary--text text--lighten-5 px-1 rounded mx-5"
         >
           {{ result.value }}
         </div>
@@ -120,11 +120,11 @@ export default {
     </div>
     <div
       v-if="answerRight"
-      class="game--result__right text-center amber--text text--lighten-3"
+      class="game-result__right text-center amber--text text--lighten-3"
     >
       Congratulations!! Your Answer is right!!
     </div>
-    <div v-if="showAnswer" class="game--result__answer text-center">
+    <div v-if="showAnswer" class="game-result__answer text-center">
       Answer is
       <span class="red--text text--lighten-3">{{ answer.join('') }}</span>
     </div>
@@ -133,7 +133,7 @@ export default {
 
 <style lang="scss">
 .game {
-  &--form {
+  &-form {
     button {
       margin: 0 5px;
     }
@@ -145,7 +145,7 @@ export default {
     }
   }
 
-  &--result {
+  &-result {
     width: 50%;
     margin: 0 auto;
     font-size: 20px;

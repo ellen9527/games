@@ -120,7 +120,7 @@ export default {
         <v-list-item-content>
           {{ text }}
         </v-list-item-content>
-        <v-list-item-icon class="list--icon">
+        <v-list-item-icon class="list-icon">
           <v-icon @click="handleCheck(key)">mdi-check</v-icon>
           <v-icon @click="handleEdit(key)">mdi-pencil</v-icon>
           <v-icon @click="handleDelete(key)">mdi-delete</v-icon>
@@ -155,7 +155,7 @@ export default {
     opacity: 0;
   }
 
-  &--icon {
+  &-icon {
     button + button {
       margin-left: 10px;
     }
