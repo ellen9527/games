@@ -1,6 +1,11 @@
 <script>
+import Timer from '~/components/timer'
+
 export default {
-  name: 'Jiugongge',
+  name: 'JiugonggePage',
+  components: {
+    Timer,
+  },
   data() {
     return {
       size: 3,
@@ -39,6 +44,7 @@ export default {
         this.cards.splice(location, 1, '')
         console.warn('handle cards:', this.cards)
       }
+      this.isTimer = !this.isTimer
     },
     _getCard(index) {
       return this.cards[index]
@@ -59,20 +65,23 @@ export default {
 </script>
 
 <template>
-  <div class="jiugongge d-flex justify-center">
-    <transition-group name="fade" class="jiugongge-square d-flex">
-      <div
-        v-for="(col, i) in cards"
-        :key="col"
-        :class="[
-          'jiugongge-square__block',
-          _getCard(i) === '' ? '--empty' : '',
-        ]"
-        @click="handleClick(i)"
-      >
-        {{ col }}
-      </div>
-    </transition-group>
+  <div class="jiugongge">
+    <timer />
+    <div class="d-flex justify-center">
+      <transition-group name="fade" class="jiugongge-square d-flex">
+        <div
+          v-for="(col, i) in cards"
+          :key="col"
+          :class="[
+            'jiugongge-square__block',
+            _getCard(i) === '' ? '--empty' : '',
+          ]"
+          @click="handleClick(i)"
+        >
+          {{ col }}
+        </div>
+      </transition-group>
+    </div>
   </div>
 </template>
 

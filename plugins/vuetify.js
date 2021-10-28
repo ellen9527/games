@@ -11,6 +11,7 @@ export default {
         'blue-grey': {
           lighten5: colors.blueGrey.lighten5,
           darken1: colors.blueGrey.darken1,
+          darken2: colors.blueGrey.darken2,
         },
         line: {
           base: colors.blue.darken3,
