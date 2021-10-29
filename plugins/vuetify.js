@@ -13,6 +13,9 @@ export default {
           darken1: colors.blueGrey.darken1,
           darken2: colors.blueGrey.darken2,
         },
+        amber: {
+          darken4: colors.amber.darken4,
+        },
         line: {
           base: colors.blue.darken3,
         },

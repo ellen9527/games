@@ -1,12 +1,12 @@
 <script>
 export default {
   name: 'Timer',
-  // props: {
-  //   switch: {
-  //     type: Boolean,
-  //     value: true,
-  //   },
-  // },
+  props: {
+    switch: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       timer: null,
@@ -28,17 +28,17 @@ export default {
     },
   },
   created() {
-    this.initTimer()
+    // this.initTimer()
   },
-  // watch: {
-  //   switch(v) {
-  //     if (v) {
-  //       this.initTimer()
-  //       return
-  //     }
-  //     clearInterval(this.timer)
-  //   },
-  // },
+  watch: {
+    switch(v) {
+      if (v) {
+        this.initTimer()
+        return
+      }
+      clearInterval(this.timer)
+    },
+  },
   methods: {
     initTimer() {
       if (this.timer) {

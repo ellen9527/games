@@ -120,7 +120,7 @@ export default {
     </div>
     <div
       v-if="answerRight"
-      class="game-result__right text-center amber--text text--lighten-3"
+      class="game-result__right text-center amber--text text--darken-4"
     >
       Congratulations!! Your Answer is right!!
     </div>

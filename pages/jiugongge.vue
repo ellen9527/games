@@ -11,18 +11,36 @@ export default {
       size: 3,
       cards: [],
       map: [],
+      timerSwitch: false,
     }
   },
   computed: {
     emptyIndex() {
       return this.cards.findIndex(item => item === '')
     },
+    lastKey() {
+      return this.size * this.size - 1
+    },
+    isComplete() {
+      const testArr = [...this.cards].slice(0, -1)
+      return testArr.every((e, i) => e === i + 1)
+    },
+    gaming() {
+      return this.timerSwitch && !this.isComplete
+    },
   },
   created() {
     this.initSuffle()
   },
+  watch: {
+    isComplete(v) {
+      if (v) {
+        this.timerSwitch = false
+      }
+    }
+  },
   methods: {
-    initSuffle() {
+    async initSuffle() {
       const pow = this.size * this.size
 
       // 初始化
@@ -43,13 +61,15 @@ export default {
 
         acc[key] = base.filter(el => el >= 0 && el < this.cards.length).sort()
         return acc
-      },[])
-      console.warn('map:', this.map)
+      }, [])
 
-      this._shffle()
+      this._shffle() // 打亂
+    },
+    _timeout(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
     },
     handleClick(location) {
-      if (this._checkChange(location)) {
+      if (this._checkChange(location) && this.gaming) {
         this._move(location, this.emptyIndex)
         // console.warn('handle cards:', this.cards)
       }
@@ -68,15 +88,7 @@ export default {
       }
       return false
     },
-    _getTarget(init, old) {
-      const legal = this.map[init].filter(el => el !== old)
-      return legal[Math.floor(Math.random() * legal.length)]
-    },
-    _move(location, target) {
-      this.cards.splice(target, 1, this._getCard(location))
-      this.cards.splice(location, 1, '')
-    },
-    _shffle() {
+    async _shffle() {
       // 打亂
       let target = [this.emptyIndex]
       for (let i = 0; i < 50; i++) {
@@ -93,14 +105,23 @@ export default {
         target.push(goal)
         endEmpty = goal
       }
-      console.warn('target:', target)
+      // console.warn('target:', target)
 
-      target.forEach((e, index) => {
-        setTimeout(() => {
-          this._move(e, this.emptyIndex)
-          
-        }, 100 * index);
+      target.forEach(async (e, i) => {
+        await this._timeout(100 * i)
+        this._move(e, this.emptyIndex)
       })
+
+      await this._timeout(100 * target.length)
+      this.timerSwitch = true // 計時開始
+    },
+    _getTarget(init, old) {
+      const legal = this.map[init].filter(el => el !== old)
+      return legal[Math.floor(Math.random() * legal.length)]
+    },
+    _move(location, target) {
+      this.cards.splice(target, 1, this._getCard(location))
+      this.cards.splice(location, 1, '')
     },
   },
 }
@@ -108,7 +129,7 @@ export default {
 
 <template>
   <div class="jiugongge">
-    <timer />
+    <timer :switch="timerSwitch" />
     <div class="d-flex justify-center">
       <transition-group name="fade" class="jiugongge-square d-flex">
         <div
@@ -123,6 +144,9 @@ export default {
           {{ col }}
         </div>
       </transition-group>
+    </div>
+    <div v-if="isComplete" class="text-center amber--text text--darken-4 mt-2">
+      Congratulations!!
     </div>
   </div>
 </template>
