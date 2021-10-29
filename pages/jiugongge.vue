@@ -10,6 +10,7 @@ export default {
     return {
       size: 3,
       cards: [],
+      map: [],
     }
   },
   computed: {
@@ -23,26 +24,34 @@ export default {
   methods: {
     initSuffle() {
       const pow = this.size * this.size
-      const space = Array(pow)
+
+      // 初始化
+      this.cards = Array(pow)
         .fill(0)
         .map((e, i) => i)
         .filter(e => e !== 0)
-      this.cards = Array(pow - 1)
-        .fill(0)
-        .map(() => {
-          const rom = Math.floor(Math.random() * space.length)
-          const num = space[rom]
-          space.splice(rom, 1)
-          return num
-        })
       this.cards.push('')
-      console.warn('cards:', this.cards)
+
+      // 產生每個位置合法移動map
+      this.map = this.cards.reduce((acc, e, key) => {
+        let base = [key - 1, key + 1, key - this.size, key + this.size]
+        if ((key + 1) % this.size === 0) {
+          base.splice(1, 1)
+        } else if (key % this.size === 0) {
+          base.splice(0, 1)
+        }
+
+        acc[key] = base.filter(el => el >= 0 && el < this.cards.length).sort()
+        return acc
+      },[])
+      console.warn('map:', this.map)
+
+      this._shffle()
     },
     handleClick(location) {
       if (this._checkChange(location)) {
-        this.cards.splice(this.emptyIndex, 1, this._getCard(location))
-        this.cards.splice(location, 1, '')
-        console.warn('handle cards:', this.cards)
+        this._move(location, this.emptyIndex)
+        // console.warn('handle cards:', this.cards)
       }
       this.isTimer = !this.isTimer
     },
@@ -50,7 +59,6 @@ export default {
       return this.cards[index]
     },
     _checkChange(location) {
-      console.warn('location:', location)
       if (location !== this.emptyIndex) {
         const [num1] = [location, this.emptyIndex].sort()
         const abs = Math.abs(location - this.emptyIndex)
@@ -59,6 +67,40 @@ export default {
         }
       }
       return false
+    },
+    _getTarget(init, old) {
+      const legal = this.map[init].filter(el => el !== old)
+      return legal[Math.floor(Math.random() * legal.length)]
+    },
+    _move(location, target) {
+      this.cards.splice(target, 1, this._getCard(location))
+      this.cards.splice(location, 1, '')
+    },
+    _shffle() {
+      // 打亂
+      let target = [this.emptyIndex]
+      for (let i = 0; i < 50; i++) {
+        const length = target.length
+        const goal = target.slice(-1)
+        const old = length > 1 ? target[length - 2] : null
+        target.push(this._getTarget(goal, old))
+      }
+
+      // 結束於最後一格
+      let endEmpty = target[target.length - 1]
+      while (endEmpty !== this.cards.length - 1) {
+        const [goal] = this.map[endEmpty].slice(-1)
+        target.push(goal)
+        endEmpty = goal
+      }
+      console.warn('target:', target)
+
+      target.forEach((e, index) => {
+        setTimeout(() => {
+          this._move(e, this.emptyIndex)
+          
+        }, 100 * index);
+      })
     },
   },
 }
@@ -109,7 +151,7 @@ export default {
   }
 
   .fade-move {
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
   }
 }
 </style>
