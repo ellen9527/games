@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      size: 3,
+      size: 5,
       cards: [],
       map: [],
       timerSwitch: false,
@@ -27,6 +27,13 @@ export default {
     },
     gaming() {
       return this.timerSwitch && !this.isComplete
+    },
+    style() {
+      const square = Math.floor(300 / this.size)
+      return {
+        width: `${square}px`,
+        height: `${square}px`,
+      }
     },
   },
   created() {
@@ -59,9 +66,10 @@ export default {
           base.splice(0, 1)
         }
 
-        acc[key] = base.filter(el => el >= 0 && el < this.cards.length).sort()
+        acc[key] = base.filter(el => el >= 0 && el < this.cards.length).sort((a, b) => a - b)
         return acc
       }, [])
+      // console.warn('this.map:', this.map)
 
       this._shffle() // 打亂
     },
@@ -91,15 +99,15 @@ export default {
     async _shffle() {
       // 打亂
       let target = [this.emptyIndex]
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 20*this.size; i++) {
         const length = target.length
-        const goal = target.slice(-1)
+        const [goal] = target.slice(-1)
         const old = length > 1 ? target[length - 2] : null
         target.push(this._getTarget(goal, old))
       }
 
       // 結束於最後一格
-      let endEmpty = target[target.length - 1]
+      let [endEmpty] = target.slice(-1)
       while (endEmpty !== this.cards.length - 1) {
         const [goal] = this.map[endEmpty].slice(-1)
         target.push(goal)
@@ -139,6 +147,7 @@ export default {
             'jiugongge-square__block',
             _getCard(i) === '' ? '--empty' : '',
           ]"
+          :style="style"
           @click="handleClick(i)"
         >
           {{ col }}
@@ -161,8 +170,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100px;
-      height: 100px;
+      /* width: 100px;
+      height: 100px; */
       color: var(--v-blue-grey-lighten5);
       background-color: var(--v-blue-grey-darken1);
       border-right: 1px solid var(--v-blue-grey-lighten5);
