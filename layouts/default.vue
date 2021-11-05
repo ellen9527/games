@@ -83,6 +83,7 @@
 
 <script>
 export default {
+  name: 'Default',
   data() {
     return {
       clipped: false,

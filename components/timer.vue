@@ -28,7 +28,7 @@ export default {
     },
   },
   created() {
-    // this.initTimer()
+    this.initTimer()
   },
   watch: {
     switch(v) {
@@ -49,6 +49,9 @@ export default {
       this.timer = setInterval(() => {
         this.time++
       }, 1000);
+    },
+    restart() {
+      this.initTimer()
     },
     _padzero(num) {
       return num < 10 ? `0${num}` : num

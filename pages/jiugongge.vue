@@ -8,10 +8,16 @@ export default {
   },
   data() {
     return {
-      size: 5,
+      size: 3,
       cards: [],
       map: [],
       timerSwitch: false,
+      items: [
+        { text: '3x3', value: 3 },
+        { text: '4x4', value: 4 },
+        { text: '5x5', value: 5 },
+      ],
+      select: 3,
     }
   },
   computed: {
@@ -44,10 +50,15 @@ export default {
       if (v) {
         this.timerSwitch = false
       }
-    }
+    },
+    select(v) {
+      this.size = v
+      this.initSuffle()
+      this.$refs.timer.restart()
+    },
   },
   methods: {
-    async initSuffle() {
+    initSuffle() {
       const pow = this.size * this.size
 
       // 初始化
@@ -69,7 +80,6 @@ export default {
         acc[key] = base.filter(el => el >= 0 && el < this.cards.length).sort((a, b) => a - b)
         return acc
       }, [])
-      // console.warn('this.map:', this.map)
 
       this._shffle() // 打亂
     },
@@ -79,7 +89,6 @@ export default {
     handleClick(location) {
       if (this._checkChange(location) && this.gaming) {
         this._move(location, this.emptyIndex)
-        // console.warn('handle cards:', this.cards)
       }
       this.isTimer = !this.isTimer
     },
@@ -113,14 +122,13 @@ export default {
         target.push(goal)
         endEmpty = goal
       }
-      // console.warn('target:', target)
 
       target.forEach(async (e, i) => {
-        await this._timeout(100 * i)
+        // await this._timeout(100 * i)
         this._move(e, this.emptyIndex)
       })
 
-      await this._timeout(100 * target.length)
+      // await this._timeout(100 * target.length)
       this.timerSwitch = true // 計時開始
     },
     _getTarget(init, old) {
@@ -137,7 +145,13 @@ export default {
 
 <template>
   <div class="jiugongge">
-    <timer :switch="timerSwitch" />
+    <v-row>
+      <v-spacer />
+      <v-col cols="2">
+        <v-select v-model="select" :items="items" outlined dense />
+      </v-col>
+    </v-row>
+    <timer ref="timer" :switch="timerSwitch" />
     <div class="d-flex justify-center">
       <transition-group name="fade" class="jiugongge-square d-flex">
         <div
@@ -170,8 +184,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      /* width: 100px;
-      height: 100px; */
       color: var(--v-blue-grey-lighten5);
       background-color: var(--v-blue-grey-darken1);
       border-right: 1px solid var(--v-blue-grey-lighten5);
