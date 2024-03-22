@@ -5,7 +5,7 @@ export default {
   target: 'static',
 
   server: {
-    port: 8080,
+    port: 8000,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -53,6 +53,6 @@ export default {
   build: {},
 
   router: {
-    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/',
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/my-games/' : '/',
   },
 }
