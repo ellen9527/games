@@ -1,5 +1,10 @@
 <template>
-  <v-row justify="center" align="center">
+  <div class="index">
+    <!-- 滾動視差簡單demo頁 -->
+    <ParallaxSimpleDemo />
+    <!-- <Home /> -->
+  </div>
+  <!-- <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <v-card class="logo py-4 d-flex justify-center">
         <NuxtLogo />
@@ -82,5 +87,5 @@
         </v-card-actions>
       </v-card>
     </v-col>
-  </v-row>
+  </v-row> -->
 </template>
