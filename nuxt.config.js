@@ -10,8 +10,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - games',
-    title: 'games',
+    titleTemplate: '%s - myGames',
+    title: 'my-games',
     htmlAttrs: {
       lang: 'en',
     },

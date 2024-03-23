@@ -1,4 +1,4 @@
-# games
+# my-games
 
 ## Build Setup
 
