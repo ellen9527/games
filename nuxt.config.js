@@ -10,8 +10,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - myGames',
-    title: 'my-games',
+    titleTemplate: '%s - games',
+    title: 'games',
     htmlAttrs: {
       lang: 'en',
     },
@@ -53,6 +53,6 @@ export default {
   build: {},
 
   router: {
-    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/my-games/' : '/',
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/',
   },
 }
