@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fgames\u002F_nuxt\u002Fstatic\u002F1711294358",layout:"default",error:a,serverRendered:true,routePath:"\u002FgameBNC",config:{_app:{basePath:"\u002Fgames\u002F",assetsPath:"\u002Fgames\u002F_nuxt\u002F",cdnURL:a}}}}(null));
