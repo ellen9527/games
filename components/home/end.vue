@@ -7,21 +7,24 @@ export default {
     return {
       ends: [
         '感謝您的耐心觀看',
-        '以下是幾款我自己閒瑕之餘寫的Side Project',
+        '以下是我自己閒瑕之餘寫的Side Project',
         '雖然並不複雜，但可以使用自己開發的小程式令我感到更加愉悅',
       ],
       links: [
         {
           name: 'Bulls & Cows 猜數字',
           link: '/gameBNC',
+          icon: 'mdi-android',
         },
         {
           name: '簡易 Todo List',
           link: '/list',
+          icon: 'mdi-format-list-bulleted-square',
         },
         {
           name: 'Jiugongge九宮格',
           link: '/jiugongge',
+          icon: 'mdi-heart',
         },
       ],
     }
@@ -36,12 +39,12 @@ export default {
       return `${Math.max(0, (this.innerHeight - this.scroll) / this.innerHeight * 100)}%`
     },
     isHiddenLink() {
-      return this.scroll < this.innerHeight
+      return this.scroll < this.innerHeight - 100
     },
   },
   methods: {
     handleClick() {
-
+      window.open("https://github.com/ellen9527/games", "_blank")
     },
   },
 }
@@ -53,14 +56,19 @@ export default {
     <div class="wrap">
       <div class="wrap__item --white">
         <div class="d-flex flex-column align-center justify-center">
+          <img :src="require(`~/assets/images/github.png`)" @click="handleClick" />
           <p v-for="(txt, index) in ends" :key="index">{{ txt }}</p>
           <div :class="['wrap__item--link', 'mt-2', { '--hidden': isHiddenLink}]">
-            <v-btn v-for="(project, index) in links" :key="index" :to="project.link">{{ project.name }}</v-btn>
+            <v-btn v-for="(project, index) in links" :key="index" :to="project.link">
+              <v-icon class="mr-1">{{ project.icon }}</v-icon>
+              {{ project.name }}
+            </v-btn>
           </div>
         </div>
       </div>
       <div class="wrap__item" :style="{ height: progress }">
         <div class="d-flex flex-column align-center justify-center">
+          <img :src="require(`~/assets/images/github-black.png`)" @click="handleClick" />
           <p v-for="(txt, index) in ends" :key="index">{{ txt }}</p>
         </div>
       </div>
@@ -105,6 +113,13 @@ export default {
       &.--white {
         color: #101010;
         background-color: #fff;
+      }
+
+      img {
+        width: 60px;
+        height: 60px;
+        margin: 10px;
+        cursor: pointer;
       }
 
       &--link {
