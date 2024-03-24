@@ -55,11 +55,11 @@ export default {
     <!-- <div class="end__banner"></div> -->
     <div class="wrap">
       <div class="wrap__item --white">
-        <div class="d-flex flex-column align-center justify-center">
+        <div class="d-flex flex-column align-center px-5">
           <img :src="require(`~/assets/images/github.png`)" @click="handleClick" />
           <p v-for="(txt, index) in ends" :key="index">{{ txt }}</p>
           <div :class="['wrap__item--link', 'mt-2', { '--hidden': isHiddenLink}]">
-            <v-btn v-for="(project, index) in links" :key="index" :to="project.link">
+            <v-btn v-for="(project, index) in links" :key="index" :to="project.link" class="ma-2">
               <v-icon class="mr-1">{{ project.icon }}</v-icon>
               {{ project.name }}
             </v-btn>
@@ -67,7 +67,7 @@ export default {
         </div>
       </div>
       <div class="wrap__item" :style="{ height: progress }">
-        <div class="d-flex flex-column align-center justify-center">
+        <div class="d-flex flex-column align-center px-5">
           <img :src="require(`~/assets/images/github-black.png`)" @click="handleClick" />
           <p v-for="(txt, index) in ends" :key="index">{{ txt }}</p>
         </div>
@@ -108,6 +108,7 @@ export default {
 
       & > div {
         height: 100vh;
+        transform: translate(0, 25%);
       }
 
       &.--white {
@@ -124,6 +125,7 @@ export default {
 
       &--link {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
         width: 100%;
         transition: all 500ms;

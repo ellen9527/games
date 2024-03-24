@@ -160,7 +160,7 @@ export default {
         </div>
       </div>
       <div class="wrap__end">
-        <h1 :style="endStyle">感謝觀看</h1>
+        <h1 :style="endStyle">Side Project</h1>
       </div>
     </div>
   </div>
@@ -198,10 +198,10 @@ export default {
       & > div {
         padding: 4px 10px;
         color: #fff;
-        background-color: purple;    
+        background-color: #003d79;    
 
         &:first-child {
-          color: purple;
+          color: #003d79;
           background-color: #fff;
           border-top-left-radius: 8px;
           border-bottom-left-radius: 8px;
@@ -217,14 +217,14 @@ export default {
     .sys {
       &__title {
         color: #fff;
-        background-color: purple;
+        background-color: #003d79;
         border-radius: 8px;
       }
 
       &__group {
         & > div {
           color: #fff;
-          background-color: purple;
+          background-color: #003d79;
 
           &:first-child {
             border-top-left-radius: 8px;
@@ -232,7 +232,7 @@ export default {
           }
 
           &:nth-child(2) {
-            color: purple;
+            color: #003d79;
             background-color: #fff;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
@@ -244,7 +244,7 @@ export default {
     .tech {
       div {
         color: #fff;
-        background-color: purple;
+        background-color: #003d79;
         border-radius: 8px;
         white-space: nowrap;
       }
