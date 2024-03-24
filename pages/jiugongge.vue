@@ -18,6 +18,7 @@ export default {
         { text: '5x5', value: 5 },
       ],
       select: 3,
+      showRule: false,
     }
   },
   computed: {
@@ -139,13 +140,24 @@ export default {
       this.cards.splice(target, 1, this._getCard(location))
       this.cards.splice(location, 1, '')
     },
+    handleRuleBtn() {
+      this.showRule = !this.showRule
+    },
   },
 }
 </script>
 
 <template>
-  <div class="jiugongge">
-    <v-row>
+  <div class="jiugongge ma-5">
+    <v-btn color="primary" block to="/">回首頁</v-btn>
+    <div class="jiugongge-rule mt-4">
+      <v-btn @click="handleRuleBtn">遊戲說明</v-btn>
+      <div class="jiugongge-rule__text pa-4" :class="{ '--hidden': !showRule }">
+        <p>這是一個數字九宮格的遊戲，點選周圍有空格的數字方塊以移動它，然後將所有數字由左向右，從上至下排列即可。</p>
+        <p>此遊戲有三種難度，可由右上選單選擇3x3、4x4、5x5的格子開始遊戲。</p>
+      </div>
+    </div>
+    <v-row class="mt-5">
       <v-spacer />
       <v-col cols="2">
         <v-select v-model="select" :items="items" outlined dense />
@@ -176,6 +188,12 @@ export default {
 
 <style lang="scss">
 .jiugongge {
+  &-rule__text {
+    &.--hidden {
+      display: none;
+    }
+  }
+
   &-square {
     max-width: 300px;
     flex-wrap: wrap;
