@@ -53,6 +53,7 @@ export default {
   build: {},
 
   router: {
-    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/',
+    // base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/',
+    base: process.env.DEPLOY_ENV === 'production' ? '/games/' : '/',
   },
 }
