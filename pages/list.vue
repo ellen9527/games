@@ -101,8 +101,10 @@ export default {
 </script>
 
 <template>
-  <div class="list">
-    <div class="text-right mb-3">
+  <div class="list ma-5">
+    <v-btn color="primary" block to="/">回首頁</v-btn>
+    <p class="mt-4 text-center">這是一個簡易的To do list</p>
+    <div class="text-right my-3">
       <v-btn v-if="!showNew" @click="handleShowNew(true)">新增待辦事項</v-btn>
       <v-btn v-if="showNew" @click="handleShowNew(false)">
         {{ cancelText }}
