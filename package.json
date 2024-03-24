@@ -1,5 +1,6 @@
 {
   "name": "games",
+  "homepage": "https://ellen9527.github.io/games/",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,7 +8,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "DEPLOY_ENV=GH_PAGES sh deploy.sh"
+    "predeploy": "nuxt build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "core-js": "^3.15.1",
