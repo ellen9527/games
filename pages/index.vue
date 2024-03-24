@@ -1,8 +1,8 @@
 <template>
   <div class="index">
     <!-- 滾動視差簡單demo頁 -->
-    <ParallaxSimpleDemo />
-    <!-- <Home /> -->
+    <!-- <ParallaxSimpleDemo /> -->
+    <Home />
   </div>
   <!-- <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">

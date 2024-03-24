@@ -102,4 +102,4 @@ export default {
       font-weight: bold;
   }
 }
-</style>
+</style>./parallaxSimpleDemo.vue
