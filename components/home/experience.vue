@@ -1,6 +1,7 @@
 <script>
 import { homeMixin } from '~/mixins/home'
 
+// group: true 團隊、false 個人;兩者都有時填 [true, false]
 const EXPERIENCE = [
   {
     year: '2009',
@@ -92,6 +93,60 @@ const EXPERIENCE = [
       },
     ],
   },
+  {
+    year: '2023.10',
+    title: '軟體公司',
+    content: [
+      {
+        name: 'PC包網',
+        role: '前端',
+        group: true,
+        technology: ['Vue2', 'JavaScript'],
+      },
+      {
+        name: 'H5/PC購物網站',
+        role: '前端',
+        group: false,
+        technology: ['Vue2', 'JavaScript'],
+      },
+      {
+        name: 'H5包網',
+        role: '前端',
+        group: true,
+        technology: ['jQuery'],
+      },
+    ],
+  },
+  {
+    year: '2024.11',
+    title: '科技公司',
+    content: [
+      {
+        name: 'PC後台管理系統',
+        role: '前端',
+        group: false,
+        technology: ['Vue3+Vite', 'TypeScript', 'Element Plus'],
+      },
+      {
+        name: 'H5/PC體育網站',
+        role: '前端',
+        group: [true, false],
+        technology: ['Vue3+Vite', 'TypeScript', 'Element Plus'],
+      },
+      {
+        name: 'PC賠率儀表板',
+        role: '前端',
+        group: false,
+        technology: ['Vue3+Vite', 'TypeScript', 'Quasar'],
+      },
+      {
+        name: 'PC GTS系統',
+        role: '前端',
+        group: false,
+        technology: ['Vue3+Vite', 'TypeScript', 'Quasar'],
+      },
+    ],
+  },
 ]
 const GAP = 100 // 緩衝
 
@@ -151,7 +206,7 @@ export default {
             <div class="sys__title px-2 py-1">{{ sys.name }}</div>
             <div class="sys__group d-flex align-center mt-2 ml-3">
               <div class="px-2 py-1">{{ sys.role }}</div>
-              <div class="px-2 py-1">{{ sys.group ? '團隊' : '個人' }}</div>
+              <div class="px-2 py-1">{{ [].concat(sys.group).map(group => group ? '團隊' : '個人').join('/') }}</div>
             </div>
             <div class="tech d-flex mt-2 ml-6">
               <div v-for="(tech, index) in sys.technology" :key="index" class="px-2 py-1">{{ tech }}</div>
@@ -225,6 +280,7 @@ export default {
         & > div {
           color: #fff;
           background-color: #003d79;
+          white-space: nowrap;
 
           &:first-child {
             border-top-left-radius: 8px;
