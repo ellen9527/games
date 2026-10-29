@@ -166,12 +166,29 @@ export default {
       text-align: center;
       letter-spacing: 2px;
     }
+
+    // Vuetify xs 斷點：輸入框獨佔一行，按鈕移到下一行平分
+    @media (max-width: 599px) {
+      flex-wrap: wrap;
+
+      .v-input {
+        flex-basis: 100%;
+      }
+
+      button {
+        flex: 1;
+      }
+    }
   }
 
   &-result {
     width: 50%;
     margin: 0 auto;
     font-size: 20px;
+
+    @media (max-width: 599px) {
+      width: 100%;
+    }
 
     &__order {
       width: 30px;

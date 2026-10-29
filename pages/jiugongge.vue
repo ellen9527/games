@@ -166,7 +166,7 @@ export default {
     </div>
     <v-row class="mt-5">
       <v-spacer />
-      <v-col cols="auto">
+      <v-col cols="auto" class="jiugongge-select">
         <v-select v-model="select" :items="items" outlined dense hide-details />
       </v-col>
       <v-col cols="auto">
@@ -202,6 +202,10 @@ export default {
     &.--hidden {
       display: none;
     }
+  }
+
+  &-select {
+    width: 120px;
   }
 
   &-square {
