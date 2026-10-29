@@ -9,9 +9,10 @@ export default {
         value => !!value || '請輸入數字!!',
         value => (value || '').length === 4 || '只能輸入4位數字',
         value => {
-          const pattern = /\d{4}/
+          const pattern = /^\d{4}$/
           return pattern.test(value) || 'Invalid Number.'
         },
+        value => new Set(value).size === (value || '').length || '數字不可重複',
       ],
       answer: [],
       results: [],
@@ -48,11 +49,10 @@ export default {
     restart() {
       this.initAnswer()
       this.reset()
-      this.results = []
-      this.showAnswer = false
+      this.init()
     },
     handleCheckAnswer() {
-      if (!this.$refs.form.validate()) {
+      if (this.answerRight || this.showAnswer || !this.$refs.form.validate()) {
         return
       }
 
@@ -63,7 +63,7 @@ export default {
           const num = parseInt(cur)
           if (num === this.answer[idx]) {
             acc.a++
-          } else if (this.answer.find(el => el === num)) {
+          } else if (this.answer.includes(num)) {
             acc.b++
           }
           return acc
@@ -113,7 +113,7 @@ export default {
       <v-btn @click="answerDisplay">給我答案</v-btn>
       <v-btn @click="restart" class="ma-2">重新開始遊戲</v-btn>
     </div>
-    <v-form ref="form" v-model="valid" class="game-form d-flex align-center">
+    <v-form ref="form" v-model="valid" class="game-form d-flex align-center" @submit.prevent="handleCheckAnswer">
       <v-text-field v-model="value" label="Guess the numbers" :rules="rules" />
       <v-btn color="primary" :disabled="answerRight || showAnswer" @click="handleCheckAnswer">
         我猜是…

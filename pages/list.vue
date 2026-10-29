@@ -44,7 +44,7 @@ export default {
       )
     },
     cancelText() {
-      if (this.editId) {
+      if (this.editId !== null) {
         return '取消編輯'
       }
       return '取消新增'
@@ -56,7 +56,7 @@ export default {
         return
       }
 
-      if (this.editId) {
+      if (this.editId !== null) {
         this._changeLists(this.editId, 'text', this.newText)
       } else {
         this.lists.push({ text: this.newText, active: false })
@@ -77,6 +77,10 @@ export default {
       this.editId = key
     },
     handleDelete(key) {
+      // 刪除後 index 會位移，編輯中的 editId 會指到別筆
+      if (this.editId !== null) {
+        this._showNew(false)
+      }
       this.lists.splice(key, 1)
     },
     handleReturnLists(key) {
@@ -111,7 +115,7 @@ export default {
       </v-btn>
     </div>
     <transition name="fade">
-      <v-form v-if="showNew" ref="newForm" class="d-flex align-center">
+      <v-form v-if="showNew" ref="newForm" class="d-flex align-center" @submit.prevent="handleNew">
         <v-text-field v-model="newText" label="待辦事項" :rules="rules" />
         <v-btn @click="handleNew">送出</v-btn>
       </v-form>

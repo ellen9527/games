@@ -1,5 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
+// GitHub Pages 部署在 /games/ 子路徑下
+const base = process.env.NODE_ENV === 'production' ? '/games/' : '/'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -21,7 +24,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: `${base}favicon.ico` }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -53,7 +56,11 @@ export default {
   build: {},
 
   router: {
-    // base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/games/' : '/',
-    base: process.env.NODE_ENV === 'production' ? '/games/' : '/',
+    base,
+  },
+
+  // GitHub Pages 找不到路徑時會讀 404.html,交給 Nuxt 在前端處理路由
+  generate: {
+    fallback: '404.html',
   },
 }

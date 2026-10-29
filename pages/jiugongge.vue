@@ -29,6 +29,9 @@ export default {
       return this.size * this.size - 1
     },
     isComplete() {
+      if (!this.cards.length) {
+        return false
+      }
       const testArr = [...this.cards].slice(0, -1)
       return testArr.every((e, i) => e === i + 1)
     },
@@ -43,7 +46,8 @@ export default {
       }
     },
   },
-  created() {
+  // 不放在 created:generate 時 server 先打亂一次，client 又打亂一次，hydration 後畫面和狀態會對不上
+  mounted() {
     this.initSuffle()
   },
   watch: {
@@ -54,8 +58,7 @@ export default {
     },
     select(v) {
       this.size = v
-      this.initSuffle()
-      this.$refs.timer.restart()
+      this.restart()
     },
   },
   methods: {
@@ -84,6 +87,10 @@ export default {
 
       this._shffle() // 打亂
     },
+    restart() {
+      this.initSuffle()
+      this.$refs.timer.restart()
+    },
     _timeout(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
@@ -98,7 +105,7 @@ export default {
     },
     _checkChange(location) {
       if (location !== this.emptyIndex) {
-        const [num1] = [location, this.emptyIndex].sort()
+        const num1 = Math.min(location, this.emptyIndex)
         const abs = Math.abs(location - this.emptyIndex)
         if ((abs === 1 && (num1 + 1) % this.size !== 0) || abs === this.size) {
           return true
@@ -159,8 +166,11 @@ export default {
     </div>
     <v-row class="mt-5">
       <v-spacer />
-      <v-col cols="2">
-        <v-select v-model="select" :items="items" outlined dense />
+      <v-col cols="auto">
+        <v-select v-model="select" :items="items" outlined dense hide-details />
+      </v-col>
+      <v-col cols="auto">
+        <v-btn @click="restart">重新開始</v-btn>
       </v-col>
     </v-row>
     <timer ref="timer" :switch="timerSwitch" />

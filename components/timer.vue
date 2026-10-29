@@ -17,18 +17,21 @@ export default {
     formatTime() {
       const t = Number(this.time)
 
-      let hour = '00'
-      const minute = this._padzero(Math.floor(t / 60))
-      if (minute >= 60) {
-        hour = this._padzero(Math.floor(minute / 60))
-      }
+      const hour = this._padzero(Math.floor(t / 3600))
+      const minute = this._padzero(Math.floor((t % 3600) / 60))
       const second = this._padzero(t % 60)
 
       return `${hour}:${minute}:${second}`
     },
   },
-  created() {
-    this.initTimer()
+  // 不放在 created:generate 時 SSR 也會跑 created,interval 沒人清會卡住 process
+  mounted() {
+    if (this.switch) {
+      this.initTimer()
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   watch: {
     switch(v) {
