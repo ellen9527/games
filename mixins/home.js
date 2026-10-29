@@ -7,11 +7,19 @@ export const homeMixin = {
     }
   },
   mounted() {
-    this.innerWidth = window.innerWidth
-    this.innerHeight = window.innerHeight
+    this.handleResize()
     window.addEventListener("scroll", this.handleScroll)
+    window.addEventListener("resize", this.handleResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll)
+    window.removeEventListener("resize", this.handleResize)
   },
   methods: {
+    handleResize() {
+      this.innerWidth = window.innerWidth
+      this.innerHeight = window.innerHeight
+    },
     handleScroll() {
       //頁面滾動距離
       this.scrollY = window.scrollY ||document.documentElement.scrollTop ||document.body.scrollTop

@@ -13,10 +13,9 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'Home - %s',
-    title: '我的自介頁',
+    titleTemplate: title => (title ? `${title} - 我的自介頁` : '我的自介頁'),
     htmlAttrs: {
-      lang: 'en',
+      lang: 'zh-Hant',
     },
     meta: [
       { charset: 'utf-8' },

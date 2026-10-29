@@ -1,6 +1,9 @@
 <script>
 export default {
   name: 'GameBNCPage',
+  head: {
+    title: 'Bulls & Cows 猜數字',
+  },
   data() {
     return {
       valid: true,

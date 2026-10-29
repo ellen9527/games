@@ -156,11 +156,13 @@ export default {
     return {
       experience: EXPERIENCE,
       localWidth: 0, // experience範圍width
-      localHeight: 0, // experience範圍height
     }
   },
   mixins: [homeMixin],
   computed: {
+    localHeight() {
+      return this.innerHeight * 6 // 設定為600vh
+    },
     isShowExperience() {
       return this.scrollY > this.innerHeight * 1.6
     },
@@ -187,7 +189,6 @@ export default {
   },
   mounted() {
     this.localWidth = this.$refs.expBox.clientWidth
-    this.localHeight = this.innerHeight * 6 // 設定為600vh
   },
 }
 </script>

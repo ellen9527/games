@@ -3,6 +3,9 @@ import Timer from '~/components/timer'
 
 export default {
   name: 'JiugonggePage',
+  head: {
+    title: 'Jiugongge九宮格',
+  },
   components: {
     Timer,
   },

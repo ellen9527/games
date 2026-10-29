@@ -1,6 +1,9 @@
 <script>
 export default {
   name: 'ListPage',
+  head: {
+    title: '簡易 Todo List',
+  },
   data() {
     return {
       lists: [
